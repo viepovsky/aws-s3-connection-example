@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-class FileStore {
+public class FileStore {
     private final AmazonS3 s3;
 
     @Autowired
@@ -20,7 +20,7 @@ class FileStore {
         this.s3 = s3;
     }
 
-    void save(String path, String fileName, Optional<Map<String, String>> optionalMetadata, InputStream inputStream) {
+    public void save(String path, String fileName, Optional<Map<String, String>> optionalMetadata, InputStream inputStream) {
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setUserMetadata(optionalMetadata.orElse(new HashMap<>()));
         try {
