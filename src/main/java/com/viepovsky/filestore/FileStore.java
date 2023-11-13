@@ -20,7 +20,7 @@ public class FileStore {
         this.s3 = s3;
     }
 
-    public void save(String path, String fileName, Optional<Map<String, String>> optionalMetadata, InputStream inputStream) {
+    public void save(String path, String fileName, InputStream inputStream, Optional<Map<String, String>> optionalMetadata) {
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setUserMetadata(optionalMetadata.orElse(new HashMap<>()));
         try {
