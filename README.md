@@ -29,7 +29,7 @@ aws_secret_access_key=your-secret-key
 3. Specify your bucket name in `application.yml` under `aws.s3.bucket-name.localTesting`
 
 4. Select your region in `application.yml` under `aws.region`
+   
+5. (Optional) Specify the maximum image size in `application.yml` under `spring.servlet.multipart.max-file-size`
 
-5. Run the application by typing `mvn spring-boot:run` or by executing the `Main.java` class.
-
-6. (Optional) Specify the maximum image size in `application.yml` under `spring.servlet.multipart.max-file-size`
+6. Run the application by typing `mvn spring-boot:run` or by executing the `Main.java` class.
