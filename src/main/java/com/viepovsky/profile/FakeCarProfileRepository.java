@@ -10,8 +10,8 @@ import java.util.UUID;
 @Repository
 class FakeCarProfileRepository {
     private final List<CarProfile> CAR_PROFILES = new ArrayList<>(List.of(
-            new CarProfile(UUID.randomUUID(), "Skoda", "Fabia", null),
-            new CarProfile(UUID.randomUUID(), "Opel", "Corsa", null)
+            new CarProfile(UUID.fromString("df629add-436e-48e1-b257-6af9e2369907"), "Skoda", "Fabia", null),
+            new CarProfile(UUID.fromString("230b0bb3-0d5f-4f9d-be1a-4dadfdbfc96e"), "Opel", "Corsa", null)
     ));
 
     List<CarProfile> getAllCarProfiles() {

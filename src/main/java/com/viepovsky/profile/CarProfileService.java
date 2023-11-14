@@ -46,6 +46,9 @@ class CarProfileService {
     byte[] downloadCarProfileImage(UUID carId) {
         CarProfile carProfile = repository.getCarProfileById(carId).orElseThrow(() -> new IllegalStateException("No Car of given id: " + carId));
         String imageKey = carProfile.getCarProfileImageKey();
+        if (imageKey.isEmpty()) {
+            throw new IllegalStateException("Image not uploaded yet.");
+        }
         return s3Service.downloadObject(imageKey);
     }
 

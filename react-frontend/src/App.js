@@ -22,7 +22,7 @@ const CarProfiles = () => {
   return carProfiles.map((carProfile, index) => {
     return (
       <div key={index}>
-
+        {carProfile.carProfileId ? <img src={`http://localhost:8080/api/v1/car-profile/${carProfile.carProfileId}/image/download`}/> : null}
         <br/>
         <br/>
         <h1>{carProfile.brand} {carProfile.model}</h1>
