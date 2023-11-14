@@ -15,9 +15,13 @@ class Main {
     @Bean
     public CommandLineRunner myCommandLineRunner(S3Service s3Service) {
         return args -> {
-            s3Service.uploadObject("images/foo","Hello World".getBytes());
-            byte[] object = s3Service.downloadObject("images/foo");
-            System.out.println("Success: " + new String(object));
+            //testBucketUploadAndDownload(s3Service);
         };
+    }
+
+    private static void testBucketUploadAndDownload(S3Service s3Service) {
+        s3Service.uploadObject("images/foo","Hello World".getBytes());
+        byte[] object = s3Service.downloadObject("images/foo");
+        System.out.println("Success: " + new String(object));
     }
 }

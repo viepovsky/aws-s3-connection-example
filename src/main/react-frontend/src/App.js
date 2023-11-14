@@ -5,29 +5,29 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 
-const UserProfiles = () => {
-  const [userProfiles, setUserProfiles] = useState([]);
+const CarProfiles = () => {
+  const [carProfiles, setCarProfiles] = useState([]);
 
-  const fetchUserProfiles = () => {
-      axios.get("http://localhost:8080/api/v1/user-profile").then(response => {
+  const fetchCarProfiles = () => {
+      axios.get("http://localhost:8080/api/v1/car-profile").then(response => {
         console.log("Response from API:", response);
-        setUserProfiles(response.data);
+        setCarProfiles(response.data);
       });
   }
 
   useEffect(() => {
-    fetchUserProfiles();
+    fetchCarProfiles();
   }, []);
 
-  return userProfiles.map((userProfile, index) => {
+  return carProfiles.map((carProfile, index) => {
     return (
       <div key={index}>
 
         <br/>
         <br/>
-        <h1>{userProfile.username}</h1>
-        <p>{userProfile.userProfileId}</p>
-        <Dropzone {...userProfile}/>
+        <h1>{carProfile.brand} {carProfile.model}</h1>
+        <p>{carProfile.carProfileId}</p>
+        <Dropzone {...carProfile}/>
         <br/>
       </div>
       // mozna tez tak <Dropzone userProfileId={userProfile.userProfileId}/>
@@ -35,7 +35,7 @@ const UserProfiles = () => {
   });
 }
 
-function Dropzone({userProfileId}) {
+function Dropzone({carProfileId}) {
   const onDrop = useCallback(acceptedFiles => {
     const file = acceptedFiles[0];
     console.log(file);
@@ -43,7 +43,7 @@ function Dropzone({userProfileId}) {
     const formData = new FormData();
     formData.append("file", file);
 
-    axios.post(`http://localhost:8080/api/v1/user-profile/${userProfileId}/image/upload`, 
+    axios.post(`http://localhost:8080/api/v1/car-profile/${carProfileId}/image/upload`, 
       formData,
       {
         headers: {
@@ -56,7 +56,7 @@ function Dropzone({userProfileId}) {
       console.log(error);
     });
   }, []);
-  
+
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
   return (
@@ -65,7 +65,7 @@ function Dropzone({userProfileId}) {
       {
         isDragActive ?
           <p>Drop the image here ...</p> :
-          <p>Drag 'n' drop profile image, or click to select profile image</p>
+          <p>Drag 'n' drop car profile image, or click to select profile image</p>
       }
     </div>
   )
@@ -74,7 +74,7 @@ function Dropzone({userProfileId}) {
 function App() {
   return (
     <div className="App">
-      <UserProfiles />
+      <CarProfiles />
     </div>
   );
 }
