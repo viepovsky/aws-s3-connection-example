@@ -56,7 +56,7 @@ function Dropzone({carProfileId}) {
       console.log(error);
     });
   }, []);
-  
+
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
   return (
@@ -65,7 +65,7 @@ function Dropzone({carProfileId}) {
       {
         isDragActive ?
           <p>Drop the image here ...</p> :
-          <p>Drag 'n' drop profile image, or click to select profile image</p>
+          <p>Drag 'n' drop car profile image, or click to select profile image</p>
       }
     </div>
   )

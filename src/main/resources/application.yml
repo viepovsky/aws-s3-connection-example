@@ -11,4 +11,6 @@ spring:
 
 aws:
   region: eu-central-1
-  bucket-name: viepovsky-test-bucket
+  s3:
+    bucket-name:
+      localTesting: viepovsky-test-bucket
