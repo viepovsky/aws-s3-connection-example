@@ -9,28 +9,38 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
 import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 
 @Service
 class CarProfileService {
+    private final CarProfileDTOMapper carProfileDTOMapper;
     private final FakeCarProfileRepository repository;
 
     private final S3Service s3Service;
 
     @Autowired
-    CarProfileService(FakeCarProfileRepository repository, S3Service s3Service) {
+    CarProfileService(CarProfileDTOMapper carProfileDTOMapper,
+                      FakeCarProfileRepository repository,
+                      S3Service s3Service) {
+        this.carProfileDTOMapper = carProfileDTOMapper;
         this.repository = repository;
         this.s3Service = s3Service;
     }
 
-    List<CarProfile> getCarProfiles() {
-        return repository.getAllCarProfiles();
+    List<CarProfileDTO> getCarProfiles() {
+        return repository.getAllCarProfiles()
+                .stream()
+                .map(carProfileDTOMapper)
+                .collect(Collectors.toList());
     }
 
-    CarProfile getCarProfile(UUID carId) {
-        return repository.getCarProfileById(carId).orElseThrow(() -> new IllegalStateException("No Car of given id: " + carId));
+    CarProfileDTO getCarProfile(UUID carId) {
+        return repository.getCarProfileById(carId)
+                .map(carProfileDTOMapper)
+                .orElseThrow(() -> new IllegalStateException("No Car of given id: " + carId));
     }
 
     byte[] downloadCarProfileImage(UUID carId) {
@@ -56,7 +66,7 @@ class CarProfileService {
     }
 
     private CarProfile getCarProfileOrThrow(UUID carId) {
-        return getCarProfile(carId);
+        return repository.getCarProfileById(carId).orElseThrow(() -> new IllegalStateException("No Car of given id: " + carId));
     }
 
     private static void isImage(MultipartFile file) {

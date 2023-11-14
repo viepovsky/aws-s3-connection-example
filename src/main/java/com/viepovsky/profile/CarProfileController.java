@@ -20,12 +20,12 @@ class CarProfileController {
     }
 
     @GetMapping
-    List<CarProfile> getCarProfiles() {
+    List<CarProfileDTO> getCarProfiles() {
         return service.getCarProfiles();
     }
 
     @GetMapping("{carId}")
-    CarProfile getCarProfile(@PathVariable UUID carId) {
+    CarProfileDTO getCarProfile(@PathVariable UUID carId) {
         return service.getCarProfile(carId);
     }
 
