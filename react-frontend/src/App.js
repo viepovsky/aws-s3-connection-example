@@ -30,7 +30,7 @@ const CarProfiles = () => {
         <Dropzone {...carProfile}/>
         <br/>
       </div>
-      // mozna tez tak <Dropzone userProfileId={userProfile.userProfileId}/>
+      // mozna tez tak <Dropzone carProfileId={carProfile.carProfileId}/>
     )
   });
 }
