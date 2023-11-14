@@ -37,7 +37,10 @@ class CarProfileController {
         service.uploadCarProfileImage(carId, file);
     }
 
-    @GetMapping("{carId}/image/download")
+    @GetMapping(
+            value = "{carId}/image/download",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
     byte[] getCarProfileImage(@PathVariable UUID carId) {
         return service.downloadCarProfileImage(carId);
     }
